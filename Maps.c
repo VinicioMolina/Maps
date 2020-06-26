@@ -1,8 +1,9 @@
+/********************************* Vinicio Molina *********************************/
 #include <ncurses.h>
 #include <stdio.h>
 #include <string.h>
 
-/********************************* Metodos *********************************/
+/********************************* methods *********************************/
 
 WINDOW *create_newwin(int height, int width, int starty, int startx);
 WINDOW *win_menu(int height, int width, int starty, int startx);
@@ -17,7 +18,7 @@ void matrizatxt();
 void atxt();
 void bordemenu();
 
-/*************************** variables globales ***************************/
+/*************************** global variables ***************************/
 
 
 
@@ -27,7 +28,7 @@ char matriztxt[102][52];
 int opcion=0;
 int dix=0, diy=0;
 char nombre[20];
-  int matriz[5][10]=           //matriz mapa
+  int matriz[5][10]=           //map matrix
       {    
            1,1,1,0,0,1,0,0,1,0,
            0,0,1,0,0,1,0,0,1,0,
@@ -42,8 +43,8 @@ char nombre[20];
 int main()
 { 
    initscr();
-       keypad( stdscr, TRUE ); /* activa / desactiva las teclas especiales */
-       curs_set( FALSE );      /* hace invisible el cursor fisico */    
+       keypad( stdscr, TRUE ); /* enable special characters */
+       curs_set( FALSE );      /* makes invisible the cursor */    
        start_color();  
             matrizmapa();
             menu();
@@ -114,7 +115,7 @@ WINDOW *create_newwin(int height, int width, int starty, int startx)
 
 void mover()
 {
-
+/*this function allows use the keyboard rows to move the char*/
    WINDOW *my_win;
    my_win = create_newwin(52, 102, 0, 0);
   // ruta(30, 40);
@@ -153,6 +154,7 @@ void mover()
 }
 void dibujo(int f, int c)
 {
+	/* this is the char that you move */
          init_pair(4,COLOR_RED, COLOR_BLACK);
          attron(COLOR_PAIR(4));
    
@@ -163,6 +165,7 @@ void dibujo(int f, int c)
 
 void destroy_win(WINDOW *local_win)
 { 
+	/*destroy the current window to load the last move*/
       int i, y, total= 1;
       for(i=1; i<52; i++)
       {
@@ -176,6 +179,7 @@ void destroy_win(WINDOW *local_win)
      
 void borde()
 {
+	/*define the borders map*/
      init_pair(5,COLOR_YELLOW, COLOR_BLACK);
          attron(COLOR_PAIR(5));
      int i=0;
@@ -230,6 +234,7 @@ void bordemenu()
 
 void matrizmapa()  
 {
+	/* this method re-scale the matrix to create a map*/
     int i, y, x=0, l=0, total= 1;
     int temp =0;
  
@@ -311,6 +316,7 @@ WINDOW *win_menu(int height, int width, int starty, int startx)
 
 void matrizatxt()
 {
+	/*this method save the movements and reply on a txt file created once you finish the program*/
     int i, y, x=0, l=0, total= 1;
     int temp =0;
  
